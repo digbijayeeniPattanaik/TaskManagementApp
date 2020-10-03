@@ -8,13 +8,17 @@ import { TodoComponent } from './todo/todo/todo.component';
 import { TodoCreateComponent } from './todo/todo-create/todo-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoUpdateComponent } from './todo/todo-update/todo-update.component';
+import { RegisterComponent } from './account/register/register.component';
+import { LoginComponent } from './account/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoComponent,
     TodoCreateComponent,
-    TodoUpdateComponent
+    TodoUpdateComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

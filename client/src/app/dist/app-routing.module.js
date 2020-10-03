@@ -9,6 +9,8 @@ exports.__esModule = true;
 exports.AppRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var login_component_1 = require("./account/login/login.component");
+var register_component_1 = require("./account/register/register.component");
 var todo_create_component_1 = require("./todo/todo-create/todo-create.component");
 var todo_update_component_1 = require("./todo/todo-update/todo-update.component");
 var todo_component_1 = require("./todo/todo/todo.component");
@@ -24,6 +26,14 @@ var routes = [
     {
         path: 'task-update/:id',
         component: todo_update_component_1.TodoUpdateComponent
+    },
+    {
+        path: 'login',
+        component: login_component_1.LoginComponent
+    },
+    {
+        path: 'register',
+        component: register_component_1.RegisterComponent
     },
     { path: '', redirectTo: '/task-list', pathMatch: 'full' },
 ];
