@@ -10,6 +10,8 @@ namespace API.Helpers
         {
             CreateMap<ToDoItem, ToDoItemDto>()
                 .ReverseMap();
+            CreateMap<RegisterDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

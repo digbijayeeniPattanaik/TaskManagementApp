@@ -1,0 +1,23 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.Dtos
+{
+    public class RegisterDto
+    {
+        [Required]
+        public string DisplayName { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        [RegularExpression("(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$", ErrorMessage = "Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and atleast 6 characters")]
+        public string Password { get; set; }
+        [Required]
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }
+        [Required]
+        public string Postcode { get; set; }
+        [Required]
+        public string Country { get; set; }
+    }
+}

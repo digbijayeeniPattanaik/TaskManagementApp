@@ -13,6 +13,7 @@ namespace Infrastructure
         public DbSet<Label> Labels { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
