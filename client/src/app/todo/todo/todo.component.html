@@ -1,36 +1,34 @@
-
-<!-- <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">To do</th>
-      <th scope="col">Due date</th>
-      <th scope="col">Status</th>
-      <th scope="col">Label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of toDoList">
-      <th scope="row">{{ item.toDo }}</th>
-      <td>
-        {{ item.dueDate | date: "medium" }}
-      </td>
-      <td>{{ item.label }}</td>
-      <td>{{ item.status }}</td>
-    </tr>
-  </tbody>
-</table> -->
-<div class="container mt-5">
-  <h2 class="cover-heading">To do Lists</h2>
-<div class="card" style="width: 18rem" *ngFor="let item of toDoList">
-  <div class="card-body">
-    <h5 class="card-title">{{item.toDo}}</h5>
-    <p class="card-text">
-      {{item.dueDate| date: "medium" }}
-    </p>
-    <h5 class="card-title">{{item.label}}</h5>
-    <h5 class="card-title">{{item.status}}</h5>
-    <a [routerLink]="['/task-update', item.id]" class="btn btn-primary">Update task</a>
-    <a (click)="deleteTask(item.id)" class="btn btn-warning">Delete task</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let item of toDoList">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h4 class="card-text">{{ item.toDo }}</h4>
+          <p class="card-text">
+            {{ item.dueDate | date: "medium" }}
+          </p>
+          <p class="card-text">Label : {{ item.label }}</p>
+          <p class="card-text">Status : {{ item.status }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button
+                type="button"
+                [routerLink]="['/task-update', item.id]"
+                class="btn btn-secondary"
+              >
+                Update task
+              </button>
+              <button
+                type="button"
+                (click)="deleteTask(item.id)"
+                class="btn btn-secondary mx-2"
+              >
+                Delete task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </div>
