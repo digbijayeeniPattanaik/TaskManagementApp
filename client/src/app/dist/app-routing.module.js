@@ -10,6 +10,7 @@ exports.AppRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var todo_create_component_1 = require("./todo/todo-create/todo-create.component");
+var todo_update_component_1 = require("./todo/todo-update/todo-update.component");
 var todo_component_1 = require("./todo/todo/todo.component");
 var routes = [
     {
@@ -20,9 +21,11 @@ var routes = [
         path: 'task-create',
         component: todo_create_component_1.TodoCreateComponent
     },
-    { path: '',
-        redirectTo: '/task-list',
-        pathMatch: 'full' }
+    {
+        path: 'task-update/:id',
+        component: todo_update_component_1.TodoUpdateComponent
+    },
+    { path: '', redirectTo: '/task-list', pathMatch: 'full' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

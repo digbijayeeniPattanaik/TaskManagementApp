@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit,Input } from '@angular/core';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ILabels, IStatus, IToDo } from 'src/app/models/todo';
 import { TodoService } from '../todo.service';
 
@@ -9,23 +10,23 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo-create.component.scss'],
 })
 export class TodoCreateComponent implements OnInit {
-  toDoForm: FormGroup;
+  @Input() toDoForm: FormGroup;
   labels: ILabels[];
   statuses: IStatus[];
   todo: IToDo;
   constructor(
     private formBuilder: FormBuilder,
-    private todoService: TodoService
-  ) {
-    this.toDoForm = this.formBuilder.group({
-      toDo: '',
-      label: '',
-      status: '',
-      dueDate: '',
-    });
-  }
+    private todoService: TodoService,
+    private router: Router 
+  ) {}
 
   ngOnInit(): void {
+    this.toDoForm = this.formBuilder.group({
+      toDo: [null, Validators.required],
+      label: [null, Validators.required],
+      status: [null, Validators.required],
+      dueDate: [null, Validators.required]
+    })
     this.getStatusesList();
     this.getLabelsList();
   }
@@ -52,11 +53,14 @@ export class TodoCreateComponent implements OnInit {
     );
   }
 
-  onSubmit(formData): void {
-    this.todo.toDo = formData['toDo'];
-    this.todo.toDo = formData['label'];
-    this.todo.toDo = formData['status'];
-    this.todo.toDo = formData['dueDate'];
-    console.log(this.todo);
+  onSubmit(): void {
+    console.log(this.toDoForm.value);
+    this.todoService.createTask(this.toDoForm.value)
+    .subscribe(() =>{
+      console.log("Saved successfully");
+      this.router.navigate(['/task-list']);
+    }, error => {
+        console.log(error);
+    });
   }
 }

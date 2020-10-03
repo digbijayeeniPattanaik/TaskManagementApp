@@ -3,6 +3,7 @@ export interface IToDo {
   label: string;
   status: string;
   dueDate: string;
+  id: number;
 }
 
 export interface ILabels {

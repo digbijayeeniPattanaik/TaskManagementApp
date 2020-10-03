@@ -17,10 +17,22 @@ var TodoService = /** @class */ (function () {
         return this.http.get(this.baseUrl + 'tasks');
     };
     TodoService.prototype.getLabelsList = function () {
-        return this.http.get(this.baseUrl + 'tasks/labels');
+        return this.http.get(this.baseUrl + 'labels');
     };
     TodoService.prototype.getStatusList = function () {
-        return this.http.get(this.baseUrl + 'tasks/statuses');
+        return this.http.get(this.baseUrl + 'Status');
+    };
+    TodoService.prototype.deleteTask = function (id) {
+        return this.http["delete"](this.baseUrl + 'tasks/' + id);
+    };
+    TodoService.prototype.updateTask = function (id, toDo) {
+        return this.http.put(this.baseUrl + 'tasks/' + id, toDo);
+    };
+    TodoService.prototype.getToDoItem = function (id) {
+        return this.http.get(this.baseUrl + 'tasks/' + id);
+    };
+    TodoService.prototype.createTask = function (toDo) {
+        return this.http.post(this.baseUrl + 'tasks', toDo);
     };
     TodoService = __decorate([
         core_1.Injectable({

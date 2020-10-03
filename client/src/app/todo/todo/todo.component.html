@@ -25,11 +25,11 @@
   <div class="card-body">
     <h5 class="card-title">{{item.toDo}}</h5>
     <p class="card-text">
-      {{item.dueDate}}
+      {{item.dueDate| date: "medium" }}
     </p>
     <h5 class="card-title">{{item.label}}</h5>
     <h5 class="card-title">{{item.status}}</h5>
-    <a href="#" class="btn btn-primary">Update</a>
+    <a [routerLink]="['/task-update', item.id]">Update task</a>
   </div>
 </div>
 </div>
