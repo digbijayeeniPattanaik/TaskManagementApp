@@ -7,9 +7,8 @@ namespace API.Dtos
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "ToDo is mandatory")]
         public string ToDo { get; set; }
-        public int LabelId { get; set; }
-        public int StatusId { get; set; }
-
+        public string Label { get; set; }
+        public string Status { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "DueDate is mandatory")]
         public DateTimeOffset DueDate { get; set; }
     }

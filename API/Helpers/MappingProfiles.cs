@@ -9,8 +9,6 @@ namespace API.Helpers
         public MappingProfiles()
         {
             CreateMap<ToDoItem, ToDoItemDto>()
-                .ForMember(a => a.LabelId, o => o.MapFrom(b => b.LabelId))
-                .ForMember(a => a.StatusId, o => o.MapFrom(b => b.StatusId))
                 .ReverseMap();
         }
     }

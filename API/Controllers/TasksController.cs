@@ -51,8 +51,8 @@ namespace API.Controllers
                 if (toDoItem != null)
                 {
                     toDoItem.DueDate = toDoItemDto.DueDate;
-                    toDoItem.LabelId = toDoItemDto.LabelId;
-                    toDoItem.StatusId = toDoItemDto.StatusId;
+                    toDoItem.Label = toDoItemDto.Label;
+                    toDoItem.Status = toDoItemDto.Status;
                     toDoItem.ToDo = toDoItemDto.ToDo;
                     toDoItem.DueDate = toDoItemDto.DueDate;
                     toDoItem.UpdateDt = DateTime.UtcNow;
@@ -88,14 +88,15 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ToDoItem>>> GetTasks(DateTimeOffset? dueDate, int? statusId, int? labelID)
+        public async Task<ActionResult<IReadOnlyList<ToDoItem>>> GetTasks(DateTimeOffset? dueDate, string status, string label)
         {
             if (ModelState.IsValid)
             {
                 var toDoItem = await _toDoContext.ToDoItems.Where(a =>
-                (dueDate != null ? a.DueDate.Date == dueDate.Value.Date : true) &&
-                (labelID != null ? a.LabelId == labelID : true) &&
-                (statusId != null ? a.StatusId == statusId : true)).ToListAsync();
+                (dueDate == null || a.DueDate.Date == dueDate.Value.Date) &&
+                 (string.IsNullOrWhiteSpace(label) || a.Label.ToLower().Contains(label)) &&
+                     (string.IsNullOrWhiteSpace(status) || a.Status.ToLower().Contains(status)))
+                    .ToListAsync();
                 return Ok(toDoItem);
             }
 
