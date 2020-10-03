@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ILabels, IStatus, IToDo } from 'src/app/models/todo';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoService } from '../todo.service';
 
 @Component({
@@ -15,34 +15,48 @@ export class TodoUpdateComponent implements OnInit {
   labels: ILabels[];
   statuses: IStatus[];
   id: number;
-  constructor(private formBuilder: FormBuilder,private activatedroute:ActivatedRoute, private todoService: TodoService) {}
+  constructor(private formBuilder: FormBuilder,private activatedroute:ActivatedRoute, private todoService: TodoService,  private router: Router ) {}
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe(params => {
         this.id = Number(params.get('id'));
     });
+    
+    this.toDoForm = this.formBuilder.group({
+      toDo: [null, Validators.required],
+      label: [null, Validators.required],
+      status: [null, Validators.required],
+      dueDate: [null, Validators.required]
+    });
+    
     this.getToDoItem(this.id);
+    this.getLabelsList();
+    this.getStatusesList();
   }
 
   getToDoItem(id: number): void {
-    this.todoService.getToDoItem(id).subscribe
-        (response => {
-          this.toDoUpdate = response;
-          console.log(this.toDoUpdate);
-        },
+    this.todoService.getToDoItem(id).subscribe(response => {
+      if(response)
+      {
+        this.toDoUpdate = response;
+        console.log(this.toDoUpdate);
+        this.toDoForm.patchValue(response);
+      }},
         (error) => {
           console.error(error);
         }
       );
   }
 
-  onSubmit(formData): void {
-    console.log(formData);
-    this.toDoUpdate.toDo = formData['toDo'];
-    this.toDoUpdate.dueDate = formData['dueDate'];
-    this.toDoUpdate.status = formData['status'];
-    this.toDoUpdate.label = formData['label'];
-    console.log(this.toDoUpdate);
+  onSubmit(): void {
+    console.log(this.toDoForm.value);
+    this.todoService.updateTask(this.id , this.toDoForm.value)
+    .subscribe(() =>{
+      console.log("Saved successfully");
+      this.router.navigate(['/task-list']);
+    }, error => {
+        console.log(error);
+    });
   }
 
   getLabelsList(): void {

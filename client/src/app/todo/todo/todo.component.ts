@@ -1,6 +1,8 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IToDo } from 'src/app/models/todo';
 import { TodoService } from '../todo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo',
@@ -9,7 +11,8 @@ import { TodoService } from '../todo.service';
 })
 export class TodoComponent implements OnInit {
   toDoList: IToDo[];
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService,
+    private router: Router ) { }
 
   ngOnInit(): void {
     this.getToDoList();
@@ -24,5 +27,21 @@ export class TodoComponent implements OnInit {
           console.error(error);
         }
       );
+  }
+
+  deleteTask(id:number): void{
+this.todoService.deleteTask(id)
+.subscribe(
+  (response) =>{
+    console.log(response);
+    console.log("loading again");
+    this.getToDoList();
+  },
+  (error) => {
+    console.error(error);
+    this.getToDoList();
+  }
+)
+
   }
 }

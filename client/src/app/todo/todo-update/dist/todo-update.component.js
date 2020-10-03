@@ -8,35 +8,51 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.TodoUpdateComponent = void 0;
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var TodoUpdateComponent = /** @class */ (function () {
-    function TodoUpdateComponent(formBuilder, activatedroute, todoService) {
+    function TodoUpdateComponent(formBuilder, activatedroute, todoService, router) {
         this.formBuilder = formBuilder;
         this.activatedroute = activatedroute;
         this.todoService = todoService;
+        this.router = router;
     }
     TodoUpdateComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedroute.paramMap.subscribe(function (params) {
             _this.id = Number(params.get('id'));
         });
+        this.toDoForm = this.formBuilder.group({
+            toDo: [null, forms_1.Validators.required],
+            label: [null, forms_1.Validators.required],
+            status: [null, forms_1.Validators.required],
+            dueDate: [null, forms_1.Validators.required]
+        });
         this.getToDoItem(this.id);
+        this.getLabelsList();
+        this.getStatusesList();
     };
     TodoUpdateComponent.prototype.getToDoItem = function (id) {
         var _this = this;
         this.todoService.getToDoItem(id).subscribe(function (response) {
-            _this.toDoUpdate = response;
-            console.log(_this.toDoUpdate);
+            if (response) {
+                _this.toDoUpdate = response;
+                console.log(_this.toDoUpdate);
+                _this.toDoForm.patchValue(response);
+            }
         }, function (error) {
             console.error(error);
         });
     };
-    TodoUpdateComponent.prototype.onSubmit = function (formData) {
-        console.log(formData);
-        this.toDoUpdate.toDo = formData['toDo'];
-        this.toDoUpdate.dueDate = formData['dueDate'];
-        this.toDoUpdate.status = formData['status'];
-        this.toDoUpdate.label = formData['label'];
-        console.log(this.toDoUpdate);
+    TodoUpdateComponent.prototype.onSubmit = function () {
+        var _this = this;
+        console.log(this.toDoForm.value);
+        this.todoService.updateTask(this.id, this.toDoForm.value)
+            .subscribe(function () {
+            console.log("Saved successfully");
+            _this.router.navigate(['/task-list']);
+        }, function (error) {
+            console.log(error);
+        });
     };
     TodoUpdateComponent.prototype.getLabelsList = function () {
         var _this = this;

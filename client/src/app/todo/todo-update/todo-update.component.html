@@ -1,7 +1,7 @@
 <div class="container" *ngIf="toDoUpdate">
     <h2>Update things to do</h2>
   
-    <form [formGroup]="toDoForm" (ngSubmit)="onSubmit(toDoForm.value)">
+    <form [formGroup]="toDoForm">
       <div class="form-group">
         <label for="name">To Do</label>
         <input
@@ -22,66 +22,30 @@
           id="dueDate"
           placeholder="Enter Due Date"
           formControlName="dueDate"
-          value="{{toDoUpdate.dueDate }}"
         />
       </div>
-<!--   
-      <div class="form-group">
-        <label for="name">Label</label>
-        <input
-          type="text"
-          class="form-control"
-          id="label"
-          placeholder="Enter label"
-          formControlName="label"
-          value="{{toDoUpdate.label}}"
-        />
-      </div>
-  
-      <div class="form-group">
-        <label for="name">Status</label>
-        <input
-          type="text"
-          class="form-control"
-          id="status"
-          placeholder="Enter Status"
-          formControlName="status"
-          value="{{toDoUpdate.status}}"
-        />
-      </div> -->
+
 
 
       <div class="form-group">
         <label for="name">Label</label>
-        <!-- <input
-          type="text"
-          class="form-control"
-          id="label"
-          placeholder="Enter label"
-          formControlName="label"
-        /> -->
         <select formControlName="label" id="label" placeholder="Select an option" class="form-control">
           <option value="" disabled selected>Select an option</option>
-          <option *ngFor="let option of statuses" [value]="option.name">{{option.name}}</option>
+          <option *ngFor="let option of labels" [value]="option.name" [selected]="option.name ==toDoUpdate.status">{{option.name}}</option>
         </select>
       </div>
   
       <div class="form-group">
         <label for="name">Status</label>
-        <!-- <input
-          type="text"
-          class="form-control"
-          id="status"
-          placeholder="Enter Status"
-          formControlName="status"
-        /> -->
         <select formControlName="status" id="status" class="form-control">
           <option value="" disabled selected>Select an option</option>
-          <option *ngFor="let option of labels" [value]="option.name">{{option.name}}</option>
+          <option *ngFor="let option of statuses" [value]="option.name" [selected]="option.name ==toDoUpdate.label">{{option.name}}</option>
         </select>
       </div>
   
-      <button class="btn btn-primary" type="submit">Submit Form</button>
+      <button (click)="onSubmit()" [disabled]="!toDoForm.valid || !toDoForm.dirty" class="btn btn-primary">
+        Save To do
+      </button>
     </form>
   </div>
   

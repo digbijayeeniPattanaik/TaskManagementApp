@@ -29,7 +29,8 @@
     </p>
     <h5 class="card-title">{{item.label}}</h5>
     <h5 class="card-title">{{item.status}}</h5>
-    <a [routerLink]="['/task-update', item.id]">Update task</a>
+    <a [routerLink]="['/task-update', item.id]" class="btn btn-primary">Update task</a>
+    <a (click)="deleteTask(item.id)" class="btn btn-warning">Delete task</a>
   </div>
 </div>
 </div>

@@ -9,8 +9,9 @@ exports.__esModule = true;
 exports.TodoComponent = void 0;
 var core_1 = require("@angular/core");
 var TodoComponent = /** @class */ (function () {
-    function TodoComponent(todoService) {
+    function TodoComponent(todoService, router) {
         this.todoService = todoService;
+        this.router = router;
     }
     TodoComponent.prototype.ngOnInit = function () {
         this.getToDoList();
@@ -22,6 +23,18 @@ var TodoComponent = /** @class */ (function () {
             _this.toDoList = response;
         }, function (error) {
             console.error(error);
+        });
+    };
+    TodoComponent.prototype.deleteTask = function (id) {
+        var _this = this;
+        this.todoService.deleteTask(id)
+            .subscribe(function (response) {
+            console.log(response);
+            console.log("loading again");
+            _this.getToDoList();
+        }, function (error) {
+            console.error(error);
+            _this.getToDoList();
         });
     };
     TodoComponent = __decorate([

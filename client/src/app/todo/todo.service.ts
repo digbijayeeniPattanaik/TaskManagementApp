@@ -24,7 +24,8 @@ export class TodoService {
   }
 
   deleteTask(id: number) {
-    return this.http.delete(this.baseUrl + 'tasks/' + id);
+    console.log(this.baseUrl + 'tasks/' + id);
+    return this.http.delete<string>(this.baseUrl + 'tasks/' + id);
   }
 
   updateTask(id: number, toDo: IToDo){

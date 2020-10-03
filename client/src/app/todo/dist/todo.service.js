@@ -23,6 +23,7 @@ var TodoService = /** @class */ (function () {
         return this.http.get(this.baseUrl + 'Status');
     };
     TodoService.prototype.deleteTask = function (id) {
+        console.log(this.baseUrl + 'tasks/' + id);
         return this.http["delete"](this.baseUrl + 'tasks/' + id);
     };
     TodoService.prototype.updateTask = function (id, toDo) {
