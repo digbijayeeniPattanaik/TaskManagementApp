@@ -1,1 +1,17 @@
-<app-todo></app-todo>
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <h1 class="masthead-brand ">To Do Management</h1>
+      <nav class="nav nav-masthead justify-content-center">
+         <a routerLink='/task-create' class="btn btn-outline-secondary mr-3">Create Task</a>
+         <a routerLink='/task-list' class="btn btn-outline-secondary mr-3">Go to list</a>
+      </nav>
+    </div>
+  </header>
+  
+
+  <main role="main" class="inner cover">
+    <router-outlet></router-outlet>
+  </main>
+</div>

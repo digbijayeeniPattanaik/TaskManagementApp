@@ -1,1 +1,35 @@
-<p>todo works!</p>
+
+<!-- <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">To do</th>
+      <th scope="col">Due date</th>
+      <th scope="col">Status</th>
+      <th scope="col">Label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of toDoList">
+      <th scope="row">{{ item.toDo }}</th>
+      <td>
+        {{ item.dueDate | date: "medium" }}
+      </td>
+      <td>{{ item.label }}</td>
+      <td>{{ item.status }}</td>
+    </tr>
+  </tbody>
+</table> -->
+<div class="container mt-5">
+  <h2 class="cover-heading">To do Lists</h2>
+<div class="card" style="width: 18rem" *ngFor="let item of toDoList">
+  <div class="card-body">
+    <h5 class="card-title">{{item.toDo}}</h5>
+    <p class="card-text">
+      {{item.dueDate}}
+    </p>
+    <h5 class="card-title">{{item.label}}</h5>
+    <h5 class="card-title">{{item.status}}</h5>
+    <a href="#" class="btn btn-primary">Update</a>
+  </div>
+</div>
+</div>

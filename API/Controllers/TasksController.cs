@@ -102,5 +102,19 @@ namespace API.Controllers
 
             return BadRequest("Some error happened");
         }
+
+        [HttpGet("labels")]
+        public async Task<ActionResult<IReadOnlyList<Label>>> GetLabels()
+        {
+            var labels = await _toDoContext.Labels.ToListAsync();
+            return Ok(labels);
+        }
+
+        [HttpGet("status")]
+        public async Task<ActionResult<IReadOnlyList<Status>>> GetStatus()
+        {
+            var statuses = await _toDoContext.Statuses.ToListAsync();
+            return Ok(statuses);
+        }
     }
 }

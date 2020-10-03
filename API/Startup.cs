@@ -26,6 +26,16 @@ namespace API
             services.AddControllers();
             services.AddDbContext<ToDoContext>(a => a.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,10 +46,10 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
+            app.UseCors("CorsPolicy");
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
