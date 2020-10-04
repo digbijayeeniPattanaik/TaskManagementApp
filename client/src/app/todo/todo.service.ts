@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ILabels, IStatus, IToDo } from '../models/todo';
+import { IRegister, ILogin, IUser } from '../models/account';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,7 +29,7 @@ export class TodoService {
     return this.http.delete(this.baseUrl + 'tasks/' + id);
   }
 
-  updateTask(id: number, toDo: IToDo){
+  updateTask(id: number, toDo: IToDo) {
     return this.http.put(this.baseUrl + 'tasks/' + id, toDo);
   }
 
@@ -38,5 +39,13 @@ export class TodoService {
 
   createTask(toDo: IToDo) {
     return this.http.post(this.baseUrl + 'tasks', toDo);
+  }
+
+  register(register: IRegister) {
+    return this.http.post(this.baseUrl + 'users/register', register);
+  }
+
+  login(login: ILogin) {
+    return this.http.post(this.baseUrl + 'users/login', login);
   }
 }

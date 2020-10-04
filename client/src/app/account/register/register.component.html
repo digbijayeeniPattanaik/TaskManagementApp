@@ -1,8 +1,7 @@
 <div class="container" >
     <h2 class="mx-3">Register</h2>
   
-    <!-- <form [formGroup]="registerForm"> -->
-    <form>
+    <form [formGroup]="registerForm">
       <div class="form-group col-md-5 mb-3">
         <label for="name">User Name</label>
         <input
@@ -28,7 +27,7 @@
       <div class="form-group col-md-5 mb-3">
         <label for="name">Password</label>
         <input
-           type="text"
+           type="password"
           class="form-control"
           id="password"
           placeholder="Enter Password"
@@ -39,7 +38,7 @@
       <div class="form-group col-md-5 mb-3">
         <label for="name">Confirm Password</label>
         <input
-           type="text"
+           type="password"
           class="form-control"
           id="confirmpassword"
           placeholder="Confirm Password"
@@ -53,9 +52,9 @@
         <input
            type="text"
           class="form-control"
-          id="addressLine1"
+          id="address1"
           placeholder="Enter Address Line 1"
-          formControlName="addressLine1"
+          formControlName="address1"
         />
       </div>
 
@@ -65,9 +64,9 @@
         <input
            type="text"
           class="form-control"
-          id="addressLine2"
+          id="address2"
           placeholder="Enter Address Line 2"
-          formControlName="addressLine2"
+          formControlName="address2"
         />
       </div>
 
@@ -76,9 +75,9 @@
         <input
            type="text"
           class="form-control"
-          id="addressLine3"
+          id="address3"
           placeholder="Enter Address Line 3"
-          formControlName="addressLine3"
+          formControlName="address3"
         />
       </div>
 
@@ -104,10 +103,9 @@
         />
       </div>
   
-      <button  class="btn btn-primary mx-3">
+      <button (click)="onSubmit()" [disabled]="!registerForm.valid || !registerForm.dirty" class="btn btn-primary mx-3">
         Register Now
       </button>
-  
     </form>
   </div>
   

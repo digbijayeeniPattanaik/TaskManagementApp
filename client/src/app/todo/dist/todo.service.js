@@ -35,6 +35,12 @@ var TodoService = /** @class */ (function () {
     TodoService.prototype.createTask = function (toDo) {
         return this.http.post(this.baseUrl + 'tasks', toDo);
     };
+    TodoService.prototype.register = function (register) {
+        return this.http.post(this.baseUrl + 'users/register', register);
+    };
+    TodoService.prototype.login = function (login) {
+        return this.http.post(this.baseUrl + 'users/login', login);
+    };
     TodoService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

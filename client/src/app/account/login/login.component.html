@@ -1,8 +1,7 @@
 <div class="container" >
     <h2 class="mx-3">Login</h2>
   
-    <!-- <form > [formGroup]="loginForm" -->
-        <form >
+    <form [formGroup]="loginForm">
     <div class="form-group col-md-4 mb-3">
         <label for="name">Email</label>
         <input
@@ -25,7 +24,7 @@
         />
       </div>
   
-      <button  class="btn btn-primary mx-3">
+      <button (click)="onSubmit()" [disabled]="!loginForm.valid || !loginForm.dirty" class="btn btn-primary mx-3">
         Login
       </button>
   </form>
